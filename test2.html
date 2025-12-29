@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,4 +69,76 @@
     <input type="text" name="firstname">
     <input type="text" name="lastname">
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container .item{
+        background-color: lightblue;
+    }
+    .main-container .item{
+        background-color: lightgreen;
+    }
+    .button {
+        background-color: blue;
+        border: 0px;
+        padding: 10px;
+    }
+    .button.active{
+        background-color: green;
+        border: 0px;
+    }
+    .button.danger{
+        background-color: red;
+        border: 0px;
+    }
+    .item1 + .item2 {
+        background-color: gray;
+    }
+    input[type="text"]{
+        border: 2px solid blue;
+        padding: 5px;
+    }
+  </style>
+</head>
+<body>
+    <!--1. item เป็นลูกค้าของ Container -->
+    <div class="container">
+        Container
+        <div class="item">
+            item 1
+        </div>
+    </div>
+    <!--2.item เป็นลูกค้าของ Container แค่ชั้นเดียว-->
+    <div class="main-container">
+        Container
+        <div class="item">
+            item 1
+            <div class="item">
+                item 2
+            </div>
+            <div class="item">
+                item 3
+            </div>
+        </div>
+    </div>
+
+    <!--3.มี class ติดกัน-->
+    <button class="button">Click Me</button>
+    <button class="button active">Click Me</button>
+    <button class="button danger">Click Me</button>
+
+    <!--4.เหมือนกัน-->
+    <div class="item1">item1</div>
+    <div class="item2">item2</div>
+
+    <!--5.attribute selector-->
+    <input type="text" name="firstname">
+    <input type="text" name="lastname">
+</body>
+>>>>>>> 625ec2a708089099df3bbfea464b9d01e3757ae1
 </html>
