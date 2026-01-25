@@ -15,11 +15,11 @@ function submitData(){
     }
 
     let userData = {
-        firstName:firstNameDOM.value,
-        lastName: lastNameDOM.value,
-        age: ageDOM.value,
-        gender:genderDOM.value,
-        descriptionDOM: descriptionDOM.value,
+        firstName: firstNameDOM ? firstNameDOM.value : '',
+        lastName: lastNameDOM ? lastNameDOM.value : '',
+        age: ageDOM ? ageDOM.value : '',
+        gender: genderDOM ? genderDOM.value : '',
+        description: descriptionDOM ? descriptionDOM.value : '',
         interests: interest
     }
     console.log('submitData', userData);
