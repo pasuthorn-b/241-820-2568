@@ -1,9 +1,9 @@
 function submitData(){
-    let firstNameDOM = document.querySelector('input[name=firstName]');
-    let lastNameDOM = document.querySelector('input[name=lastName]');
+    let firstNameDOM = document.querySelector('input[name="firstname"]');
+    let lastNameDOM = document.querySelector('input[name="lastname"]');
     let ageDOM = document.querySelector('input[name="age"]');
-    let genderDOM = document.querySelector('input[name=gender]:checked');
-    let interestsDOM = document.querySelectorAll('input[name=interests]:checked');
+    let genderDOM = document.querySelector('input[name="gender"]:checked');
+    let interestsDOM = document.querySelectorAll('input[name="interest"]:checked');
 
     let descriptionDOM = document.querySelector('textarea[name=description]');
     let interest = ''
@@ -15,10 +15,10 @@ function submitData(){
     }
 
     let userData = {
-        firstName: firstNameDOM ? firstNameDOM.value : '',
-        lastName: lastNameDOM ? lastNameDOM.value : '',
+        firstName: firstNameDOM ? firstNameDOM.value : "",
+        lastName: lastNameDOM ? lastNameDOM.value : "",
         age: ageDOM ? ageDOM.value : '',
-        gender: genderDOM ? genderDOM.value : '',
+        gender: genderDOM ? genderDOM.value : "",
         description: descriptionDOM ? descriptionDOM.value : '',
         interests: interest
     }
