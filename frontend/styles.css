@@ -101,6 +101,23 @@ textarea {
     font-family: inherit;
     box-sizing: border-box; /* ให้ padding ไม่ดันขนาดกล่อง */
 }
+.message{
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: none;
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+.message.danger{
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
 
 /* ปุ่มส่งข้อมูล */
 .center {

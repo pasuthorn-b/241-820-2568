@@ -1,12 +1,14 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
-const app = express()
+const app = express();
+const cors = require('cors');
 const port = 8000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
-let users = []
+let users = [];
 let counter = 1;
 let conn =null;
 const initmySQL = async() =>{
@@ -46,6 +48,9 @@ app.post('/users',async (req,res)=>{
 try {
   let user = req.body;
   const results = await conn.query('INSERT INTO users SET ?',user)
+  res.status(201).json({
+      message: 'User created successfully'
+    });
 }catch (error) {
   console.error('Error creating user:', error);
   res.status(500).json({
