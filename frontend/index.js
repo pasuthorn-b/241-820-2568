@@ -15,11 +15,11 @@ const submitData = async () => {
         }
     }
     let userData = {
-        firstName: firstNameDOM ? firstNameDOM.value : "",
-        lastName: lastNameDOM ? lastNameDOM.value : "",
-        age: ageDOM ? ageDOM.value : '',
-        gender: genderDOM ? genderDOM.value : "",
-        description: descriptionDOM ? descriptionDOM.value : '',
+        firstName:firstNameDOM.value,
+        lastName:lastNameDOM.value,
+        age:ageDOM.value ,
+        gender: genderDOM.value,
+        description: descriptionDOM.value,
         interests: interest
     }
     try{
