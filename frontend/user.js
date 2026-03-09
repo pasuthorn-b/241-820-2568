@@ -13,19 +13,22 @@ const loadData = async () => {
         htmlData += ` <div>
         ${user.firstname} ${user.lastname}
         <button>Edit</button>
-        <button class='delete' data-id='${user.id}'>Delete</button>
+        <button class='delete-btn' data-index='${i}'>Delete</button>
         </div>`
     }
     htmlData += '</div>';
     userDOM.innerHTML = htmlData;
 
-    const deleteDOMs = document.getElementsByClassName("delete");
+    const deleteDOMs = document.getElementsByClassName("delete-btn");
+    const users = response.data;
     for (let i = 0; i < deleteDOMs.length; i++) {
         deleteDOMs[i].addEventListener("click", async (event) => {
-            // ดึง id ของ user ที่ต้องการลบจาก data-id attribute
-            const id = event.target.dataset.id;
+            // ดึง index ของ user ที่ต้องการลบ
+            const index = event.target.dataset.index;
+            const user = users[index];
             try{
-                await axios.delete(`${BASE_URL}/users/${id}`);
+                // ใช้ firstname และ lastname เป็น identifier เพราะ table ไม่มี id
+                await axios.post(`${BASE_URL}/users-delete`, { firstname: user.firstname, lastname: user.lastname });
                 loadData(); // โหลดข้อมูลใหม่หลังจากลบสำเร็จ
             }catch(error){
                 console.error("Error deleting user:", error);

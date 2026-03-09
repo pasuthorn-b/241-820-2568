@@ -153,6 +153,30 @@ app.delete('/users/:id',async(req,res)=>{
   });
   }
 });
+
+//path = POST /users-delete สำหรับลบ user โดยใช้ firstname และ lastname
+app.post('/users-delete',async(req,res)=>{
+  try{
+    if (!conn) await initmySQL();
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    const results = await conn.query('DELETE FROM users WHERE firstname = ? AND lastname = ?', [firstname, lastname]);
+    if(results[0].affectedRows === 0){
+      throw{statusCode: 404, message: 'User not found'}
+    } 
+    res.json({
+      message: 'User deleted successfully'
+    });
+  }catch (error) {  
+    console.error('Error deleting user:', error);
+    let statusCode = error.statusCode || 500;
+    res.status(statusCode).json({
+      message: 'Error deleting user',
+      error: error.message
+    });
+  }
+});
+
 app.listen(port, async ()=>{
   await initmySQL();
   console.log(`Server is running on port ${port}`);
