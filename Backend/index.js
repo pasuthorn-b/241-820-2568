@@ -22,14 +22,8 @@ const initmySQL = async() =>{
 }
 
 app.get('/testdb-new', async(req, res) => {
-  try {
-    if (!conn) await initmySQL();
     const results = await conn.query('SELECT * FROM users');
     res.json(results[0]);
-  } catch (error) {
-    console.error('Database query error:', error.message);
-    res.status(500).json({ error: 'Database query error' });
-  }
 });
 /**
   GET /users สำหรับ get ข้อมูล user ทั้งหมด
@@ -45,25 +39,54 @@ app.get('/users',async (req,res)=>{
    const results = await conn.query('SELECT * FROM users');
    res.json(results[0]);
 });
+const validateData = (userData) => {
+    let errors = [];
+    if (!userData.firstName) {
+        errors.push('กรุณากรอกชื่อ');
+    }
+    if (!userData.lastName) {
+        errors.push('กรุณากรอกนามสกุล');
+    }
+    if (!userData.age) {
+        errors.push('กรุณากรอกอายุ');
+    }
+    if (!userData.gender) {
+        errors.push('กรุณาเลือกเพศ');
+    }
+    if (!userData.interests) {
+        errors.push('กรุณาเลือกงานอดิเรก');
+    }
+    if (!userData.description) {
+        errors.push('กรุณากรอกคำอธิบาย');
+    }
+    return errors;
+}
 //path = POST /user สำหรับเพิ่ม user ใหม่
 app.post('/users',async (req,res)=>{
 try {
-  if (!conn) await initmySQL();
   let user = req.body;
-  console.log('Inserting user:', user);
+  const errors = validateData(user);
+  if (errors.length > 0) {
+    throw {
+      message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+      errors: errors
+    }
+  }
   const results = await conn.query('INSERT INTO users SET ?',user);
   console.log('Insert result:', results);
-  res.status(201).json({
+  res.json({
       message: 'User created successfully',
       data: results[0]
     });
 }catch (error) {
-  console.error('Error creating user:', error);
+  const errormessage = error.message || 'Error creating user';
+  const errors = error.errors || [];
+  console.error('Error creating user:', error.message);
   res.status(500).json({
-    message: 'Error creating user',
-    error: error.message || error.toString()
-  });
-}
+      message: errormessage,
+      errors: errors,
+    });
+  }
 });
 
 //path = GET /users/:id สำหรับ get ข้อมูล user ที่มี id ตรงกับที่ส่งมา
